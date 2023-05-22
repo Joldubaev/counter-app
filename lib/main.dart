@@ -1,8 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_example/cubit/counter_cubit.dart';
 
 void main() {
+  final CounterState counterState1 = CounterState(counterValue: 1);
+  final CounterState counterState2 = CounterState(counterValue: 1);
+  if (kDebugMode) {
+    print(counterState1 ==counterState2);
+  }
   runApp(const MyApp());
 }
 
@@ -52,21 +58,21 @@ class _MyHomePageState extends State<MyHomePage> {
               listener: (context, state) {
                 if (state.wasIncremended == true) {
                   ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text('Inecrement')));
+                      .showSnackBar(const SnackBar(content: Text('Inecrement')));
                 } else if (state.wasIncremended == false) {
                   ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text('Decrement')));
+                      .showSnackBar(const SnackBar(content: Text('Decrement')));
                 }
               },
               builder: (context, state) {
                 if (state.counterValue < 0) {
                   return Text(
-                    'Bro Negative number ' + state.counterValue.toString(),
+                    'Bro Negative number ${state.counterValue}',
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
                 } else if (state.counterValue % 2 == 0) {
                   return Text(
-                    'Bro whats up your maths ' + state.counterValue.toString(),
+                    'Bro whats up your maths ${state.counterValue}',
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
                 } else {
